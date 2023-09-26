@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Debug apple_cantonese_asr_test",
+            "program": "${workspaceFolder:apple_cantonese_asr_test}/.build/debug/apple_cantonese_asr_test",
+            "args": [],
+            "cwd": "${workspaceFolder:apple_cantonese_asr_test}",
+            "preLaunchTask": "swift: Build Debug apple_cantonese_asr_test"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "sourceLanguages": [
+                "swift"
+            ],
+            "name": "Release apple_cantonese_asr_test",
+            "program": "${workspaceFolder:apple_cantonese_asr_test}/.build/release/apple_cantonese_asr_test",
+            "args": [],
+            "cwd": "${workspaceFolder:apple_cantonese_asr_test}",
+            "preLaunchTask": "swift: Build Release apple_cantonese_asr_test"
+        }
+    ]
+}

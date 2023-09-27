@@ -9,6 +9,8 @@ func recognizeFile(url: URL) async throws -> [Segment] {
       userInfo: ["message": "The system doesn't support the zh-HK locale."])
   }
 
+  myRecognizer.supportsOnDeviceRecognition = true
+
   guard myRecognizer.isAvailable else {
     throw NSError(
       domain: "RecognitionError", code: 2, userInfo: ["message": "The recognizer isn't available."])

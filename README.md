@@ -16,17 +16,17 @@ Two kinds of Character Error Rates are computed:
 Here are the results obtained using macOS Ventura 13.6 (22G120) on a M1 Max macBook Pro:
 | Dataset               | Best Predictions CER Score  | Closest Predictions CER Score |
 |-----------------------|-----------------------------|-------------------------------|
-| Common Voice 11 yue   | 13.846%                     | 9.604%                        |
-| Common Voice 15 yue   | 13.988%                     | 9.677%                        |
-| Common Voice 11 zh-HK | 11.383%                     | 8.637%                        |
+| Common Voice 11 yue   | 10.335%                     | 5.886%                        |
+| Common Voice 15 yue   | 10.525%                     | 5.999%                        |
+| Common Voice 11 zh-HK | 9.831%                      | 7.028%                        |
 
 And here are the results obtained using macOS Sonoma 14.0 (23A344) on the same M1 Max macBook Pro:
 | Dataset               | Best Predictions CER Score  | Closest Predictions CER Score |
 |-----------------------|-----------------------------|-------------------------------|
-| Common Voice 11 yue   | 11.015%                     | 9.524%                        |
-| Common Voice 15 yue   | 11.014%                     | 9.531%                        |
-| Common Voice 11 zh-HK | 9.707%                      | 8.244%                        |
-
+| Common Voice 11 yue   | 7.381%                      | 5.819%                        |
+| Common Voice 15 yue   | 7.417%                      | 5.869%                        |
+| Common Voice 11 zh-HK | 8.114%                      | 6.625%                        |
+| Guangzhou Daily Use   | 7.409%                      | 5.160%                        |
 
 # Footnote
 For the zh-HK test set, we changed the ASCII double quotes to Chinese-style double quotes because of TSV parsing issues:

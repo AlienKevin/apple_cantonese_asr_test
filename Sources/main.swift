@@ -3,7 +3,7 @@ import SwiftCSV
 
 @available(macOS 10.15, *)
 func recognizeFile(url: URL) async throws -> [Segment] {
-  guard let myRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "zh-HK")) else {
+  guard let myRecognizer = SFSpeechRecognizer(locale: Locale(identifier: "yue-CN")) else {
     throw NSError(
       domain: "RecognitionError", code: 1,
       userInfo: ["message": "The system doesn't support the zh-HK locale."])
@@ -58,7 +58,7 @@ struct Segment: Codable {
   }
 }
 
-let datasetName: String = "common-voice-11-zh-hk"
+let datasetName: String = "guangzhou-daily-use"
 
 if #available(macOS 10.15, *) {
   let metadata: CSV = try CSV<Named>(

@@ -11,7 +11,7 @@ punctuation_re = re.compile(r'\p{P}')
 cer = load("cer")
 
 # Read JSON data from file
-with open("common-voice-11-zh-hk-transcriptions.json", "r", encoding="utf-8") as f:
+with open("guangdong-daily-use-transcriptions.json", "r", encoding="utf-8") as f:
     transcript_json = json.load(f)
 
 references = []
@@ -87,10 +87,15 @@ def to_sounds(sentence: str, output_tones=True) -> [[str]]:
         segment = ""
     return sounds
 
+
+def normalize_sentence(s: str) -> str:
+    return punctuation_re.sub("", s).replace("噶", "㗎").replace("咧", "呢")
+
+
 def evaluate_cer():
     # Iterate over each sentence in the transcript
     for entry in tqdm(transcript_json):
-        reference = entry["sentence"]
+        reference = normalize_sentence(entry["sentence"])
         references.append(reference)
 
         """

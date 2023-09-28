@@ -17,3 +17,7 @@ Here are the results obtained using macOS Ventura 13.6 (22G120) on a M1 Max macB
 | Common Voice 11  | 13.846%                     | 9.604%                        |
 | Common Voice 15  | 13.988%                     | 9.677%                        |
 
+# Footnote
+For the zh-HK test set, we changed the ASCII double quotes to Chinese-style double quotes because of TSV parsing issues:
+
+common_voice_zh-HK_23107405.mp3   同事找來一對桌上"小"揚聲器 => 同事找來一對桌上“小”揚聲器

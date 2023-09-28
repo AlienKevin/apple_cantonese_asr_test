@@ -28,7 +28,16 @@ And here are the results obtained using macOS Sonoma 14.0 (23A344) on the same M
 | Common Voice 11 zh-HK | 8.114%                      | 6.625%                        |
 | Guangzhou Daily Use   | 7.409%                      | 5.160%                        |
 
-# Footnote
+# Minor Preprocessing
 For the zh-HK test set, we changed the ASCII double quotes to Chinese-style double quotes because of TSV parsing issues:
-
+```
 common_voice_zh-HK_23107405.mp3   同事找來一對桌上"小"揚聲器 => 同事找來一對桌上“小”揚聲器
+```
+
+When calculating the WER, we always strip away the punctuations first.
+The Guangzhou Daily Use corpus uses uncommon character variants of two Cantonese particles so we replace all such characters
+with their canonical forms.
+```
+噶 => 㗎
+咧 => 呢
+```

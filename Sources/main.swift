@@ -58,15 +58,17 @@ struct Segment: Codable {
   }
 }
 
+let datasetName: String = "common-voice-11-zh-hk"
+
 if #available(macOS 10.15, *) {
   let metadata: CSV = try CSV<Named>(
-    url: URL(fileURLWithPath: "data/common-voice-11/test.tsv"), delimiter: .tab)
+    url: URL(fileURLWithPath: "data/\(datasetName)/test.tsv"), delimiter: .tab)
 
   var results: [RecognitionResult] = []
   for row in metadata.rows {
     if let path = row["path"], let sentence = row["sentence"] {
       print("Processing \(path)")
-      let url = URL(fileURLWithPath: "data/common-voice-11/test/\(path)")
+      let url = URL(fileURLWithPath: "data/\(datasetName)/test/\(path)")
       do {
         let segments = try await recognizeFile(url: url)
         let result = RecognitionResult(
@@ -84,7 +86,7 @@ if #available(macOS 10.15, *) {
   let encoder = JSONEncoder()
   let currentWorkingPath = FileManager.default.currentDirectoryPath
   let transcriptionsFile = URL(fileURLWithPath: currentWorkingPath).appendingPathComponent(
-    "common-voice-11-transcriptions.json")
+    "\(datasetName)-transcriptions.json")
   let jsonData = try encoder.encode(results)
   if let jsonString = String(data: jsonData, encoding: .utf8) {
     try jsonString.write(to: transcriptionsFile, atomically: true, encoding: .utf8)

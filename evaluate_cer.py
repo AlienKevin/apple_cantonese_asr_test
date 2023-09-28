@@ -9,10 +9,9 @@ cjk_char_re = re.compile(r'[\p{Unified_Ideograph}\u3006\u3007]')
 punctuation_re = re.compile(r'\p{P}')
 
 cer = load("cer")
-wer = load("wer")
 
 # Read JSON data from file
-with open("common-voice-15-transcriptions.json", "r", encoding="utf-8") as f:
+with open("common-voice-11-zh-hk-transcriptions.json", "r", encoding="utf-8") as f:
     transcript_json = json.load(f)
 
 references = []
@@ -128,45 +127,11 @@ def evaluate_cer():
 
         closest_predictions.append(closest_prediction)
 
-        """
-        Find the closest prediction in terms of sound to the reference among all alternative segments
-        """
-        if reference == best_prediction:
-            sound_closest_predictions.append(best_predictions.split(""))
-            sound_closest_references.append(reference.split(""))
-        else:
-            reference_sounds = list(product(*to_sounds(reference, output_tones=False)))
-
-            min_cer = float('inf')
-            sound_closest_prediction = None
-            sound_closest_reference = None
-
-            for combination in all_combinations:
-                prediction = ''.join(combination)
-                for prediction_sound in product(*to_sounds(prediction, output_tones=False)):
-                    for reference_sound in reference_sounds:
-                        print(prediction_sound)
-                        print(reference_sound)
-                        print()
-                        cer_result = wer.compute(predictions=[' '.join(prediction_sound)], references=[' '.join(reference_sound)])
-
-                        if cer_result < min_cer:
-                            min_cer = cer_result
-                            sound_closest_prediction = ' '.join(prediction_sound)
-                            sound_closest_reference = ' '.join(reference_sound)
-
-            sound_closest_predictions.append(sound_closest_prediction)
-            sound_closest_references.append(sound_closest_reference)
-
     cer_score_best = cer.compute(predictions=best_predictions, references=references)
     print(f"CER Score for best predictions: {cer_score_best}")
 
     cer_score_closest = cer.compute(predictions=closest_predictions, references=references)
     print(f"CER Score for closest predictions: {cer_score_closest}")
-
-    # Use WER instead of CER because we have jyutpings instead of characters
-    cer_score_sound_closest = wer.compute(predictions=sound_closest_predictions, references=references)
-    print(f"CER Score for sound closest predictions: {cer_score_sound_closest}")
 
 if __name__ == "__main__":
     import doctest

@@ -19,6 +19,7 @@ Here are the results obtained using macOS Ventura 13.6 (22G120) on a M1 Max macB
 | Common Voice 11 yue   | 10.335%                     | 5.886%                        |
 | Common Voice 15 yue   | 10.525%                     | 5.999%                        |
 | Common Voice 11 zh-HK | 9.831%                      | 7.028%                        |
+| Guangzhou Daily Use   | 8.681%                      | 6.348%                        |
 
 And here are the results obtained using macOS Sonoma 14.0 (23A344) on the same M1 Max macBook Pro:
 | Dataset               | Best Predictions CER Score  | Closest Predictions CER Score |

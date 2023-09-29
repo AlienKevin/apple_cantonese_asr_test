@@ -11,7 +11,7 @@ punctuation_re = re.compile(r'\p{P}')
 cer = load("cer")
 
 # Read JSON data from file
-with open("guangdong-daily-use-transcriptions.json", "r", encoding="utf-8") as f:
+with open("guangzhou-daily-use-transcriptions.json", "r", encoding="utf-8") as f:
     transcript_json = json.load(f)
 
 references = []

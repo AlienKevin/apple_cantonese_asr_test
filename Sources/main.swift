@@ -1,5 +1,6 @@
 import Speech
 import SwiftCSV
+import Tqdm
 
 @available(macOS 10.15, *)
 func recognizeFile(url: URL) async throws -> [Segment] {
@@ -65,9 +66,9 @@ if #available(macOS 10.15, *) {
     url: URL(fileURLWithPath: "data/\(datasetName)/test.tsv"), delimiter: .tab)
 
   var results: [RecognitionResult] = []
-  for row in metadata.rows {
+  for row in TqdmSequence(sequence: metadata.rows) {
     if let path = row["path"], let sentence = row["sentence"] {
-      print("Processing \(path)")
+      // print("Processing \(path)")
       let url = URL(fileURLWithPath: "data/\(datasetName)/test/\(path)")
       do {
         let segments = try await recognizeFile(url: url)

@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "swift-tqdm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ebraraktas/swift-tqdm.git",
+      "state" : {
+        "revision" : "71f0a47e1c1149cc486be2e436d7369e90ca4449",
+        "version" : "0.1.2"
+      }
+    },
+    {
       "identity" : "swiftcsv",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftcsv/SwiftCSV.git",

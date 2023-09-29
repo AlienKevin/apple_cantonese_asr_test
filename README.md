@@ -13,7 +13,7 @@ Two kinds of Character Error Rates are computed:
 1. CER on the top prediction outputted by Apple's ASR
 2. The minimum CER on all prediction candidates outputted by Apple's ASR. Or in other words, I pick the prediction candidate that has the closest levenshtein distance to the reference sentence and calculate its CER.
 
-![CER Comparison Chart](cer_comparison.png)
+![CER Comparison Chart](media/cer_comparison.png)
 
 Here are the numbers obtained using macOS Ventura 13.6 (22G120) on a M1 Max macBook Pro:
 | Dataset               | Top Predictions CER Score  | Closest Predictions CER Score |
@@ -30,6 +30,19 @@ And here are the numbers obtained using macOS Sonoma 14.0 (23A344) on the same M
 | Common Voice 11 yue   | 7.381%                      | 5.819%                        |
 | Common Voice 11 zh-HK | 8.114%                      | 6.625%                        |
 | Guangzhou Daily Use   | 7.409%                      | 5.160%                        |
+
+# Dataset statistics
+
+## Audio durations
+
+![CV 15 Yue Audio Durations Chart](media/cv_15_yue_audio_durations.png)
+
+![CV 11 Yue Audio Durations Chart](media/cv_11_yue_audio_durations.png)
+
+![CV 11 zh-hk Audio Durations Chart](media/cv_11_zh_hk_audio_durations.png)
+
+![Guangzhou Daily Use Audio Durations Chart](media/guangzhou_daily_use_audio_durations.png)
+
 
 # Minor Preprocessing
 For the zh-HK test set, we changed the ASCII double quotes to Chinese-style double quotes because of TSV parsing issues:

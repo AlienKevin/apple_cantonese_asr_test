@@ -10,22 +10,22 @@ Hence, I conducted an evaluation on two versions of the Common Voice Yue dataset
     - Current [state-of-the-art developed by HKUST](https://arxiv.org/pdf/2201.02419.pdf) achieves a **7.65% CER**. However, HKUST's model was also trained on the Common Voice dataset along with their MDCC dataset so it might not be a fair comparison.
 
 Two kinds of Character Error Rates are computed:
-1. CER on the best prediction outputted by Apple's ASR
+1. CER on the top prediction outputted by Apple's ASR
 2. The minimum CER on all prediction candidates outputted by Apple's ASR. Or in other words, I pick the prediction candidate that has the closest levenshtein distance to the reference sentence and calculate its CER.
 
 Here are the results obtained using macOS Ventura 13.6 (22G120) on a M1 Max macBook Pro:
-| Dataset               | Best Predictions CER Score  | Closest Predictions CER Score |
+| Dataset               | Top Predictions CER Score  | Closest Predictions CER Score |
 |-----------------------|-----------------------------|-------------------------------|
-| Common Voice 11 yue   | 10.335%                     | 5.886%                        |
 | Common Voice 15 yue   | 10.525%                     | 5.999%                        |
+| Common Voice 11 yue   | 10.335%                     | 5.886%                        |
 | Common Voice 11 zh-HK | 9.831%                      | 7.028%                        |
 | Guangzhou Daily Use   | 8.681%                      | 6.348%                        |
 
 And here are the results obtained using macOS Sonoma 14.0 (23A344) on the same M1 Max macBook Pro:
-| Dataset               | Best Predictions CER Score  | Closest Predictions CER Score |
+| Dataset               | Top Predictions CER Score  | Closest Predictions CER Score |
 |-----------------------|-----------------------------|-------------------------------|
-| Common Voice 11 yue   | 7.381%                      | 5.819%                        |
 | Common Voice 15 yue   | 7.417%                      | 5.869%                        |
+| Common Voice 11 yue   | 7.381%                      | 5.819%                        |
 | Common Voice 11 zh-HK | 8.114%                      | 6.625%                        |
 | Guangzhou Daily Use   | 7.409%                      | 5.160%                        |
 

@@ -13,7 +13,9 @@ Two kinds of Character Error Rates are computed:
 1. CER on the top prediction outputted by Apple's ASR
 2. The minimum CER on all prediction candidates outputted by Apple's ASR. Or in other words, I pick the prediction candidate that has the closest levenshtein distance to the reference sentence and calculate its CER.
 
-Here are the results obtained using macOS Ventura 13.6 (22G120) on a M1 Max macBook Pro:
+![CER Comparison Chart](cer_comparison.png)
+
+Here are the numbers obtained using macOS Ventura 13.6 (22G120) on a M1 Max macBook Pro:
 | Dataset               | Top Predictions CER Score  | Closest Predictions CER Score |
 |-----------------------|-----------------------------|-------------------------------|
 | Common Voice 15 yue   | 10.525%                     | 5.999%                        |
@@ -21,7 +23,7 @@ Here are the results obtained using macOS Ventura 13.6 (22G120) on a M1 Max macB
 | Common Voice 11 zh-HK | 9.831%                      | 7.028%                        |
 | Guangzhou Daily Use   | 8.681%                      | 6.348%                        |
 
-And here are the results obtained using macOS Sonoma 14.0 (23A344) on the same M1 Max macBook Pro:
+And here are the numbers obtained using macOS Sonoma 14.0 (23A344) on the same M1 Max macBook Pro:
 | Dataset               | Top Predictions CER Score  | Closest Predictions CER Score |
 |-----------------------|-----------------------------|-------------------------------|
 | Common Voice 15 yue   | 7.417%                      | 5.869%                        |

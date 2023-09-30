@@ -1,5 +1,19 @@
 # Evaluation of Apple's Cantonese speech recognition on Common Voice
 
+## Summary
+
+The new upgrade for iOS/macOS claims to improve the accuracy of dictation, and some people online have commented that Cantonese dictation has also improved, but there is no data-drive comparison. To confirm Apple's claim, I selected three publicly available Cantonese phonetic databases for testing, comparing CERs before and after upgrade. The test results were a maximum 30% decrease in CER, a significant improvement in the ASR model's ability to select words (as measured by top predictions), and a significant improvement in the comprehensive ability to recognize the Guangzhou dialect. Apple's new model performs better than Google and Microsoft's cloud ASR, with CER 35% lower than Google and 67% lower than Microsoft. The model runs entirely on-device and is significantly faster after the upgrade (tested on M1 Max macBook Pro).
+
+MDCC, one of the largest public Cantonese voice dataset, used Google cloud API to do the first round of annotation. If you need to do this kind of annotation in the future, however, you can also consider choosing macOS ASR for higher accuracy, faster processing, and free on-device recognition. 
+
+Cantonese summary:
+
+iOS/macOS嘅新upgrade聲稱提升咗dictation嘅準確率，網上有人評價話廣東話dictation都有所進步，但係冇一個data-driven嘅比較。為咗證實apple嘅claim，我揀咗三個公開嘅粵語語音數據庫嚟做測試，比較upgrade前後嘅CER。測試結果係CER有最高30%嘅下降，ASR模型嘅揀字能力大幅提升(as measured by top predictions)，綜合能力喺廣州話方言似乎都有顯著提升(as measured by closest predictions)。相比google同microsoft嘅cloud ASR，apple嘅新模型表現更佳，CER相比google要低35%，相比microsoft要低67%，而且喺macBook Pro上嘅運行速度都有顯著提升。
+
+之前公開嘅MDCC數據庫係用google cloud api嚟做第一輪標注，我諗大家如果未來需要做語音數據庫都可以考慮揀macOS嘅ASR嚟做標注，佢嘅準確率高、速度快、仲係免費。 
+
+## Introduction
+
 I'm interested in developing a speech-powered Cantonese learning app for iOS but can't find qualitative evaluations of Apple's ASR model.
 Hence, I conducted an evaluation on two versions of the Common Voice Yue dataset and one version of the Common Voice zh-HK dataset. Note that the Yue dataset contains purely colloquial Cantonese while the older zh-HK dataset contains a mixture of colloquial and formal language usages.
 

@@ -13,6 +13,8 @@ Two kinds of Character Error Rates are computed:
 1. CER on the top prediction outputted by Apple's ASR
 2. The minimum CER on all prediction candidates outputted by Apple's ASR. Or in other words, I pick the prediction candidate that has the closest levenshtein distance to the reference sentence and calculate its CER.
 
+## macOS Ventura vs Sonoma
+
 ![CER Comparison Chart](media/cer_comparison.png)
 
 Here are the numbers obtained using macOS Ventura 13.6 (22G120) on a M1 Max macBook Pro:
@@ -31,10 +33,17 @@ And here are the numbers obtained using macOS Sonoma 14.0 (23A344) on the same M
 | Common Voice 11 zh-HK | 8.114%                      | 6.625%                        |
 | Guangzhou Daily Use   | 7.409%                      | 5.160%                        |
 
-For comparison, here's the result for Microsoft Cognitive Services Speech SDK:
+## macOS Sonoma vs Cloud APIs
+
+For comparison, here are the results of macOS Sonoma speech API, Google Speech-to-text v1p1beta1, and Microsoft Cognitive Services Speech-to-text on the Common Voice 15 yue dataset:
+
+![Competitor CER Comparison Chart](media/competitor_cer_comparison.png)
+
 | Dataset               | Top Predictions CER Score  | Closest Predictions CER Score |
 |-----------------------|-----------------------------|-------------------------------|
-| Common Voice 15 yue   | 22.549%                     | 8.960%                        |
+| macOS Sonoma          | 7.417%                      | 5.869%                        |
+| Google                | 11.392%                     | 5.718%                        |
+| Microsoft             | 22.549%                     | 8.960%                        |
 
 # Dataset statistics
 

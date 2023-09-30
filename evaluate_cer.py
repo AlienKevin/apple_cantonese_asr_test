@@ -11,7 +11,7 @@ punctuation_re = re.compile(r'\p{P}')
 cer = load("cer")
 
 # Read JSON data from file
-with open("azure/common-voice-15-transcriptions.json", "r", encoding="utf-8") as f:
+with open("google/common-voice-15-transcriptions.json", "r", encoding="utf-8") as f:
     transcript_json = json.load(f)
 
 references = []
@@ -105,10 +105,20 @@ def evaluate_cer():
             # apple
             best_segments = [segment["substring"] for segment in entry["segments"]]
             best_prediction = "".join(best_segments)
-        else:
+            best_predictions.append(best_prediction)
+        elif "DisplayText" in entry["result"]:
             # azure
             best_prediction = entry["result"]["DisplayText"]
-        best_predictions.append(best_prediction)
+            best_predictions.append(best_prediction)
+        else:
+            # google
+            # not empty audio
+            if len(entry["result"]) > 0:
+                best_prediction = entry["result"][0]["transcript"]
+                best_predictions.append(best_prediction)
+            else:
+                # remove empty audio's reference
+                references.pop()
 
         """
         Find the closest prediction to the reference among all alternative segments
@@ -123,23 +133,28 @@ def evaluate_cer():
                 all_segment_options.append(options)
             # Generate all possible combinations of segments and alternative segments.
             all_combinations = list(product(*all_segment_options))
-        else:
+        elif "DisplayText" in entry["result"]:
             # azure
             all_combinations = list(map(lambda candidate: candidate["Display"], entry["result"]["NBest"]))
+        else:
+            # google
+            all_combinations = list(map(lambda candidate: candidate["transcript"], entry["result"]))
 
-        min_cer = float('inf')
-        closest_prediction = None
+        # skip empty audios
+        if len(all_combinations) > 0:
+            min_cer = float('inf')
+            closest_prediction = None
 
-        for combination in all_combinations:
-            prediction = ''.join(combination)
-            
-            cer_result = cer.compute(predictions=[prediction], references=[reference])
+            for combination in all_combinations:
+                prediction = ''.join(combination)
+                
+                cer_result = cer.compute(predictions=[prediction], references=[reference])
 
-            if cer_result < min_cer:
-                min_cer = cer_result
-                closest_prediction = prediction
+                if cer_result < min_cer:
+                    min_cer = cer_result
+                    closest_prediction = prediction
 
-        closest_predictions.append(closest_prediction)
+            closest_predictions.append(closest_prediction)
 
     cer_score_best = cer.compute(predictions=best_predictions, references=references)
     print(f"CER Score for best predictions: {cer_score_best}")

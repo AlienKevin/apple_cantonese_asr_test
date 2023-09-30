@@ -31,6 +31,11 @@ And here are the numbers obtained using macOS Sonoma 14.0 (23A344) on the same M
 | Common Voice 11 zh-HK | 8.114%                      | 6.625%                        |
 | Guangzhou Daily Use   | 7.409%                      | 5.160%                        |
 
+For comparison, here's the result for Microsoft Cognitive Services Speech SDK:
+| Dataset               | Top Predictions CER Score  | Closest Predictions CER Score |
+|-----------------------|-----------------------------|-------------------------------|
+| Common Voice 15 yue   | 22.549%                     | 8.960%                        |
+
 # Dataset statistics
 
 ## Audio durations

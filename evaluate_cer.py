@@ -11,7 +11,7 @@ punctuation_re = re.compile(r'\p{P}')
 cer = load("cer")
 
 # Read JSON data from file
-with open("guangzhou-daily-use-transcriptions.json", "r", encoding="utf-8") as f:
+with open("azure/common-voice-15-transcriptions.json", "r", encoding="utf-8") as f:
     transcript_json = json.load(f)
 
 references = []
@@ -101,22 +101,31 @@ def evaluate_cer():
         """
         Best prediction outputted by the ASR
         """
-        best_segments = [segment["substring"] for segment in entry["segments"]]
-        best_prediction = "".join(best_segments)
+        if "segments" in entry:
+            # apple
+            best_segments = [segment["substring"] for segment in entry["segments"]]
+            best_prediction = "".join(best_segments)
+        else:
+            # azure
+            best_prediction = entry["result"]["DisplayText"]
         best_predictions.append(best_prediction)
 
         """
         Find the closest prediction to the reference among all alternative segments
         """
-        # Prepare a list of lists, where each inner list contains the substring
-        # and its alternativeSubstrings.
-        all_segment_options = []
-        for segment in entry["segments"]:
-            options = [segment["substring"]] + segment.get("alternativeSubstrings", [])
-            all_segment_options.append(options)
-        
-        # Generate all possible combinations of segments and alternative segments.
-        all_combinations = list(product(*all_segment_options))
+        if "segments" in entry:
+            # apple
+            # Prepare a list of lists, where each inner list contains the substring
+            # and its alternativeSubstrings.
+            all_segment_options = []
+            for segment in entry["segments"]:
+                options = [segment["substring"]] + segment.get("alternativeSubstrings", [])
+                all_segment_options.append(options)
+            # Generate all possible combinations of segments and alternative segments.
+            all_combinations = list(product(*all_segment_options))
+        else:
+            # azure
+            all_combinations = list(map(lambda candidate: candidate["Display"], entry["result"]["NBest"]))
 
         min_cer = float('inf')
         closest_prediction = None

@@ -40,7 +40,7 @@ def recognize(filename):
 import pandas as pd
 from pathlib import Path
 
-dataset_name = "common-voice-15"
+dataset_name = "common-voice-11-zh-hk"
 dataset_path = Path("data")/dataset_name
 
 metadata = pd.read_csv(dataset_path/"test.tsv", sep="\t")
@@ -52,5 +52,5 @@ for _, row in tqdm(list(metadata.iterrows())):
     if result is not None:
         results.append({ "path": row["path"], "sentence": row["sentence"], "result": result })
 
-with open(dataset_name + "-transcripts.json", "w+") as output_file:
+with open(dataset_name + "-transcriptions.json", "w+") as output_file:
     json.dump(results, output_file, ensure_ascii=False)

@@ -22,6 +22,7 @@ Hence, I conducted an evaluation on two versions of the Common Voice Yue dataset
 * **Common Voice 15 Yue**: The latest version of the dataset as of Sep 27, 2023. Contains 2560 test audios.
 * **Common Voice 11 zh-HK**: Commonly used by open source ASR models for training and evaluation. Contains 5591 test audios.
     - Current [state-of-the-art developed by HKUST](https://arxiv.org/pdf/2201.02419.pdf) achieves a **7.65% CER**. However, HKUST's model was also trained on the Common Voice dataset along with their MDCC dataset so it might not be a fair comparison.
+* **Guangzhou Daily Use**: 4.06 hours of transcribed Guangzhou Cantonese scripted speech on daily use sentences open sourced by Magic Data. You can download the data from: https://magichub.com/datasets/guangzhou-cantonese-scripted-speech-corpus-daily-use-sentence/
 
 Two kinds of Character Error Rates are computed:
 1. CER on the top prediction outputted by Apple's ASR

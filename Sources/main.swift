@@ -59,9 +59,8 @@ struct Segment: Codable {
   }
 }
 
-let datasetName: String = "guangzhou-daily-use"
-
-if #available(macOS 10.15, *) {
+@available(macOS 10.15, *)
+func runSpeechRecognition(datasetName: String = "common-voice-15") async throws {
   let metadata: CSV = try CSV<Named>(
     url: URL(fileURLWithPath: "data/\(datasetName)/test.tsv"), delimiter: .tab)
 
@@ -92,6 +91,44 @@ if #available(macOS 10.15, *) {
   if let jsonString = String(data: jsonData, encoding: .utf8) {
     try jsonString.write(to: transcriptionsFile, atomically: true, encoding: .utf8)
   }
+}
+
+@available(macOS 14, *)
+func generateCustomLM(datasetName: String) async throws {
+  let data = SFCustomLanguageModelData(
+    locale: Locale(identifier: "zh_HK"),
+    identifier: "com.kevin.\(datasetName)", version: "1.0")
+
+  let vocab: CSV = try CSV<Named>(
+    url: URL(fileURLWithPath: "vocab/\(datasetName).tsv"), delimiter: .tab)
+
+  for row in TqdmSequence(sequence: vocab.rows) {
+    guard let word = row["word"] else {
+      print("Error: word is nil")
+      continue
+    }
+    guard let count = row["count"] else {
+      print("Error: count is nil")
+      continue
+    }
+    // increase frequency of each word
+    guard let count = Int(count) else {
+      print("Error: count is not an integer")
+      continue
+    }
+    data.insert(
+      // increase frequency of each word
+      phraseCount: SFCustomLanguageModelData.PhraseCount.init(phrase: word, count: count * 10))
+  }
+
+  let url = URL(filePath: FileManager.default.currentDirectoryPath + "/customLM/\(datasetName).bin")
+  try await data.export(to: url)
+
+  print("Finished exporting custom language model to \(url)")
+}
+
+if #available(macOS 14, *) {
+  try await generateCustomLM(datasetName: "common-voice-15")
 } else {
-  print("Speech recognition is not supported.")
+  print("macOS version must be above or equal to 10.15")
 }
